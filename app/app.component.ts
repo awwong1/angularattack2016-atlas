@@ -1,32 +1,32 @@
-import { Component } from '@angular/core';
-import { MaterializeDirective } from 'angular2-materialize';
-import {BodyComponent} from './app-body.component';
+import {Component} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {MaterializeDirective} from "angular2-materialize";
+
+import {HeroesComponent} from './heroes.component';
+import {HeroDetailComponent} from './hero-detail.component';
+import {DashboardComponent} from './dashboard.component';
+import {HeroService} from './hero.service';
 
 @Component({
     selector: 'my-app',
-    directives: [MaterializeDirective, BodyComponent],
     template: `
-    <div>
-      <nav>
-        <div class="blue-grey lighten-2 nav-wrapper">
-          <a href="#" class="brand-logo" style="margin-left:1%">ngWorld</a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-          </ul>
-
-          <ul class="side-nav" id="navmobile">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-          </ul>
-        </div>
-      </nav>
-      <h1>YOHDOG2</h1>
-      <app-body></app-body>
-      </div>
-      `
+    <h1>{{title}}</h1>
+    <nav>
+      <a [routerLink]="['Dashboard']">Dashboard</a>
+      <a [routerLink]="['Heroes']">Heroes</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `,
+    styleUrls: ['app/app.component.css'],
+    directives: [MaterializeDirective, ROUTER_DIRECTIVES],
+    providers: [HeroService]
 })
-
-export class AppComponent { }
+@RouteConfig([
+    // {path: '/', redirectTo: ['Dashboard'] },
+    {path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true},
+    {path: '/heroes', name: 'Heroes', component: HeroesComponent},
+    {path: '/detail/:id', name: 'HeroDetail', component: HeroDetailComponent}
+])
+export class AppComponent {
+    title = 'Tour of Heroes';
+}
