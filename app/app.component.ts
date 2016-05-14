@@ -6,7 +6,8 @@ import {HeroesComponent} from './heroes.component';
 import {HeroDetailComponent} from './hero-detail.component';
 import {DashboardComponent} from './dashboard.component';
 import {HeroService} from './hero.service';
-import {howToComponent} from './howto.component';
+import {howToComponent} from './how-to.component';
+import {countrySelectComponent} from './country-select.component';
 
 @Component({
     selector: 'my-app',
@@ -22,10 +23,12 @@ import {howToComponent} from './howto.component';
     </nav>
 
     <howToComponent></howToComponent>
+    <br/>
+    <countrySelectComponent></countrySelectComponent>
 
     <router-outlet></router-outlet>
   `,
-    directives: [MaterializeDirective, ROUTER_DIRECTIVES, howToComponent],
+    directives: [MaterializeDirective, ROUTER_DIRECTIVES, howToComponent, countrySelectComponent],
     providers: [HeroService]
 })
 
