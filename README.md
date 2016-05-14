@@ -1,20 +1,14 @@
-# This is your [AngularAttack](https://www.angularattack.com) 2016 Repo
+# Atlas
 
-This repo is the start of your AngularAttack 2016 entry. It contains the simple [Angular2 starter](https://angular.io/docs/ts/latest/quickstart.html) files.
-
-**DO NOT MAKE ANY CODE CHECKINS TO THIS REPOSITORY BEFORE THE COMPETITION OFFICIALLY BEGINS.**
-
-**DOING SO COULD DISQUALIFY YOU.**
-
-
-However, before the competition starts, there are some things we encourage you to do to get prepared for the competition.
-
+Hackathon project for [AngularAttack 2016](https://www.angularattack.com). Visualize and interact with [World Data Bank api](http://data.worldbank.org/developers/api-overview).
 
 ### Step 1) Get Your Local Environment setup
 
-Clone this repo locally, and make sure all your team members have access to it.
+Clone this repo locally, and make sure all your team members have access to it. This project was generated using [angular2-cli](https://github.com/angular/angular-cli).
 
 * Install the latest [Node / NPM](https://nodejs.org).
+
+* Install Angular2 CLI with `npm install -g angular-cli`
 
 * `git clone git@github.com:rumblex/angularattack2016-atlas.git`
 
@@ -22,7 +16,7 @@ Clone this repo locally, and make sure all your team members have access to it.
 
 * `npm install`
 
-* `npm start` will start the server locally to test that everything is running correctly
+* `npm start` or `ng start` will start the server locally to test that everything is running correctly. Open a browser at `localhost:4200` to see the application.
 
 
 ### Step 2) Deploy Your App
@@ -30,6 +24,12 @@ Clone this repo locally, and make sure all your team members have access to it.
 While you can't make any checkins before the comp, what you **can** do right now is deploy this sample app to [Surge](https://surge.sh) (our competition hosting provider).
 
 * `npm install -g surge`
+
+* `ng build`
+
+* `cp CNAME dist/`
+
+* `cd dist`
 
 * `surge .`
 
@@ -41,8 +41,14 @@ If you receive an error message `"You do not have permission to publish to atlas
 
 * `surge . --add djphan@ualberta.ca,connerdunn7399@gmail.com,gnarlywhale@live.co.uk,admin@alexander-wong.com`
 
+## License
 
-### Step 4) Wait til competition starts
+The MIT License (MIT)
 
-It begins at exactly [May 14 at 00:00 UTC](https://www.wolframalpha.com/input/?i=May+14,+2016+0:00+UTC). Once the competition starts,   you can write over this project.
+Copyright (c) 2016 Alexander Wong <admin@alexander-wong.com>
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
