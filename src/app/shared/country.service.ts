@@ -1,14 +1,16 @@
 import {Injectable}     from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Country}           from './country';
 
 import {Observable} from 'rxjs/observable';
+
+import {Country}           from './country';
 
 @Injectable()
 export class CountryService {
   private countriesUrl = '/app/shared/query-resource/countries.json';
 
   constructor(private http:Http) {
+    this.http = http;
   }
 
   /**
