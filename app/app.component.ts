@@ -11,8 +11,13 @@ import {HeroService} from './hero.service';
     selector: 'my-app',
     template: `
     <nav>
-      <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['Heroes']">Heroes</a>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">ngWorld</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a [routerLink]="['Dashboard']">Dashboard</a></li>
+          <li><a [routerLink]="['Heroes']">Heroes</a></li>
+        </ul>
+      </div>
     </nav>
     <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
       <li>
