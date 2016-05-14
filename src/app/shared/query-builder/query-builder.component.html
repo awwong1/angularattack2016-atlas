@@ -9,6 +9,13 @@
       </div>
     </div>
     <div class="row">
+      <div class="input-field col m12">
+        <select id="indicators" materialize="material_select" [materializeSelectOptions]="selectOptions">
+          <option *ngFor="let indicator of indicators" [value]="indicator.id">{{indicator.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
       <div class="input-field col m6">
         <input placeholder="From" type="text" class="validate">
       </div>
