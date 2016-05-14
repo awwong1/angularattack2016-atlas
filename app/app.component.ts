@@ -16,6 +16,20 @@ import {HeroService} from './hero.service';
       <a [routerLink]="['Heroes']">Heroes</a>
     </nav>
     <router-outlet></router-outlet>
+    <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">First</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      </li>
+      <li>
+        <div class="collapsible-header">Second</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      </li>
+      <li>
+        <div class="collapsible-header">Third</div>
+        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      </li>
+    </ul>
   `,
     styleUrls: ['app/app.component.css'],
     directives: [MaterializeDirective, ROUTER_DIRECTIVES],
