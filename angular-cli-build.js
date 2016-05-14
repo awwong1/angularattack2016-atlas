@@ -15,9 +15,7 @@ module.exports = function(defaults) {
       'hammerjs/hammer.min.js',
       'materialize-css/dist/css/*.css',
       'materialize-css/dist/js/*.js',
-      'materialize-css/dist/fonts/roboto/Roboto-Regular.woff2',
-      'materialize-css/dist/fonts/roboto/Roboto-Regular.woff',
-      'materialize-css/dist/fonts/roboto/Roboto-Regular.tff',
+      'materialize-css/dist/fonts/roboto/*',
       'angular2-materialize/dist/*',
       '@angular/**/*.js'
     ]
