@@ -1,2 +1,2 @@
 export {environment} from './environment';
-export {NgWorldAppComponent} from './ng-world.component';
+export {AtlasAppComponent} from './atlas.component';
