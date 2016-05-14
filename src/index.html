@@ -5,6 +5,12 @@
   <title>Atlas</title>
   <base href="/">
   {{content-for 'head'}}
+
+  <!-- Materialize Icons -->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Vendor CSS -->
+  <link type="text/css" rel="stylesheet" href="vendor/materialize-css/dist/css/materialize.min.css">
+  <!-- End Vendor CSS -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,15 +29,40 @@
 <body>
   <atlas-app>Loading...</atlas-app>
 
-  <script src="vendor/es6-shim/es6-shim.js"></script>
-  <script src="vendor/reflect-metadata/Reflect.js"></script>
-  <script src="vendor/systemjs/dist/system.src.js"></script>
-  <script src="vendor/zone.js/dist/zone.js"></script>
+  <script type="text/javascript" src="vendor/es6-shim/es6-shim.js"></script>
+  <script type="text/javascript" src="vendor/reflect-metadata/Reflect.js"></script>
+  <script type="text/javascript" src="vendor/systemjs/dist/system.src.js"></script>
+  <script type="text/javascript" src="vendor/zone.js/dist/zone.js"></script>
+
+  <!-- Import jQuery before materialize.js -->
+  <script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="vendor/hammerjs/hammer.min.js"></script>
+  <script type="text/javascript" src="vendor/materialize-css/dist/js/materialize.min.js"></script>
+
+
 
   <script>
     System.import('system-config.js').then(function () {
       System.import('main');
     }).catch(console.error.bind(console));
+
+    System.config({
+      defaultJSExtensions: true,
+      packages: {
+        "materialize-css": {
+          "main": "dist/js/materialize"
+        },
+        "materialize": {
+          "main": "dist/materialize-directive",
+          "defaultExtension": "js"
+        }
+      },
+      map: {
+        "materialize-css": "vendor/materialize-css",
+        "materialize": "vendor/angular2-materialize",
+        "angular2-materialize": "vendor/angular2-materialize"
+      }
+    });
   </script>
 </body>
 </html>

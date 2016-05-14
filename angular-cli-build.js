@@ -11,6 +11,13 @@ module.exports = function(defaults) {
       'es6-shim/es6-shim.js',
       'reflect-metadata/*.js',
       'rxjs/**/*.js',
+      'jquery/dist/jquery.min.js',
+      'hammerjs/hammer.min.js',
+      'materialize-css/dist/css/materialize.min.css',
+      'materialize-css/dist/js/materialize.min.js',
+      'materialize-css/dist/fonts/roboto/Roboto-Regular.woff2',
+      'materialize-css/dist/fonts/roboto/Roboto-Regular.woff',
+      'materialize-css/dist/fonts/roboto/Roboto-Regular.tff',
       '@angular/**/*.js'
     ]
   });
