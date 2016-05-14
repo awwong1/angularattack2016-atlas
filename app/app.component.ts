@@ -1,45 +1,25 @@
 import {Component} from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES, Router, Routes} from "@angular/router";
+
 import {MaterializeDirective} from "angular2-materialize";
 
-import {HeroesComponent} from './heroes.component';
-import {HeroDetailComponent} from './hero-detail.component';
-import {DashboardComponent} from './dashboard.component';
-import {HeroService} from './hero.service';
-import {howToComponent} from './how-to.component';
-import {countrySelectComponent} from './country-select.component';
+import {MainComponent} from "./main/main.component";
+import {WorldDataBankComponent} from "./world-data-bank/world-data-bank.component";
 
+@Routes([
+    {path: '/', component: MainComponent},
+    {path: '/world-data-bank', component: WorldDataBankComponent},
+])
 @Component({
     selector: 'my-app',
-    template: `
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo" style="margin-left:1%">{{title}}</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>How To Instructions</li>
-          <li><a [routerLink]="['Heroes']">Heroes</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <howToComponent></howToComponent>
-    <br/>
-    <countrySelectComponent></countrySelectComponent>
-
-    <router-outlet></router-outlet>
-  `,
-    directives: [MaterializeDirective, ROUTER_DIRECTIVES, howToComponent, countrySelectComponent],
-    providers: [HeroService]
+    templateUrl: 'app/app.component.html',
+    directives: [ROUTER_DIRECTIVES, MaterializeDirective]
 })
-
-@RouteConfig([
-    // {path: '/', redirectTo: ['Dashboard'] },
-    {path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true},
-    {path: '/heroes', name: 'Heroes', component: HeroesComponent},
-    {path: '/detail/:id', name: 'HeroDetail', component: HeroDetailComponent}
-])
-
 export class AppComponent {
-    title = 'ngWorld';
-    longTitle = 'Angular World Data Bank';
+    constructor(private router:Router) {
+    }
+
+    ngOnInit() {
+        this.router.navigate(['/']);
+    }
 }
