@@ -1,3 +1,10 @@
-<h1>
-  {{title}}
-</h1>
+<nav>
+  <div class="nav-wrapper">
+    <a [routerLink]="['/']" class="brand-logo">{{title}}</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a [routerLink]="['/']">{{title}}</a></li>
+      <li><a [routerLink]="['/world-data-bank']">World Data Bank</a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
