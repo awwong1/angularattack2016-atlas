@@ -6,6 +6,12 @@ import {MaterializeDirective} from "angular2-materialize";
   templateUrl: 'app/main/main.component.html',
   directives: [MaterializeDirective]
 })
+
+
 export class MainComponent {
-  title = 'MainComponent';
+  title = 'Main Page';
+  waterfallimgurl = 'static/img/waterfall.jpg';
+  riverimgurl = 'static/img/river.jpg';
+
+
 }
