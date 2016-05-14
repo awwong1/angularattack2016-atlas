@@ -16,7 +16,7 @@ Clone this repo locally, and make sure all your team members have access to it. 
 
 * `npm install`
 
-* `npm start` or `ng start` will start the server locally to test that everything is running correctly. Open a browser at `localhost:4200` to see the application.
+* `npm start` or `ng server` will start the server locally to test that everything is running correctly. Open a browser at `localhost:4200` to see the application.
 
 
 ### Step 2) Deploy Your App
