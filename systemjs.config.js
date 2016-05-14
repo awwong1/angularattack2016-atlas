@@ -16,8 +16,8 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { defaultExtension: 'js' },
-    'materialize-css': { 'main': 'dist/js/materialize' },
-    'materialize': { 'main': 'dist/materialize-directive', 'defaultExtension': 'js' }
+    'materialize-css': { main: 'dist/js/materialize' },
+    'materialize': { main: 'dist/materialize-directive', defaultExtension: 'js' }
   };
 
   var packageNames = [
