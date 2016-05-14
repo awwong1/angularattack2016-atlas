@@ -17,13 +17,22 @@
     </div>
     <div class="row">
       <div class="input-field col m6">
-        <input placeholder="From" type="text" class="validate">
+        <form materialize class="col s12">
+          <label for="from">From</label>
+          <input id="from"
+                 materialize="pickadate"
+                 [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+                 type="text"/>
+        </form>
       </div>
-      <div class="input-field col m3">
-        <input type="text" placeholder="From">
-      </div>
-      <div class="input-field col m3">
-        <input type="text" placeholder="To">
+      <div class="input-field col m6">
+        <form materialize class="col s12">
+          <label for="from">To</label>
+          <input id="to"
+                 materialize="pickadate"
+                 [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+                 type="text"/>
+        </form>
       </div>
     </div>
     <div class="row">
