@@ -12,6 +12,6 @@ export class MainComponent {
   title = 'Main Page';
   waterfallimgurl = 'static/img/waterfall.jpg';
   riverimgurl = 'static/img/river.jpg';
-
-
+  caravanimgurl = 'static/img/caravan.jpg';
+  winterimgurl = 'static/img/winter.jpg';
 }
