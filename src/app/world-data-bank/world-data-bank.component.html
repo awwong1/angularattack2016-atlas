@@ -1,9 +1,3 @@
-<h1>World Data Bank</h1>
-<p>Another nested page</p>
+<h1>{{title}}</h1>
+<p>Potential spot for the How To?</p>
 <query-builder></query-builder>
-<select materialize="material_select" [materializeSelectOptions]="selectOptions">
-  <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
-</select>
-<ul>
-  <li *ngFor="#obj of countryKeys">{{obj | json}}, {{countries[obj]}}</li>
-</ul>
