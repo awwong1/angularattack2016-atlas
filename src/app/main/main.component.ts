@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {MaterializeDirective} from "angular2-materialize";
+import {ROUTER_DIRECTIVES, Router, Routes} from "@angular/router";
 
 @Component({
   selector: 'world-data-bank',
   templateUrl: 'app/main/main.component.html',
-  directives: [MaterializeDirective],
+  directives: [MaterializeDirective, ROUTER_DIRECTIVES],
   styleUrls: ['app/main/main.component.css']
 })
 
