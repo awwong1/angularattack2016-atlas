@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 
 import {MaterializeDirective} from "angular2-materialize";
 
@@ -13,7 +13,8 @@ import {WorldDataBankService} from "../worldDataBank.service";
   templateUrl: 'app/shared/query-builder/query-builder.component.html',
   directives: [MaterializeDirective],
   providers: [CountryService, IndicatorService, WorldDataBankService],
-  styleUrls:["static/css/spinner.css", "static/css/query-builder.css"]
+  styleUrls:["static/css/spinner.css", "static/css/query-builder.css"],
+  outputs:['serviceStartEvent', 'serviceEndEvent']
 })
 
 export class QueryBuilderComponent {
@@ -27,6 +28,9 @@ export class QueryBuilderComponent {
   private inputCountries:string = "";
   private inputCountriesSuggestions:Array<Country> = [];
   private inputErrors = "";
+  
+  public serviceStartEvent: EventEmitter<boolean> = new EventEmitter();
+  public serviceEndEvent: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
@@ -118,6 +122,7 @@ export class QueryBuilderComponent {
     this.inputErrors = "";
     
     this.loading = true;
+    this.serviceStartEvent.emit(true);
     
     for (var country in selectedCountries) {
       if (!(selectedCountries.hasOwnProperty(country))) continue;
@@ -133,8 +138,9 @@ export class QueryBuilderComponent {
     this.worldDataBankService.execute(resultQuery).subscribe(
       worldDataBankResponse => {
         this.loading = false;
-        // todo: Do something with this
-        console.log(worldDataBankResponse);
+        
+        // This event tells the wbd component that the json response has be recieved.
+        this.serviceEndEvent.emit(true);
       },
       error => {
         this.loading = false;
@@ -142,7 +148,6 @@ export class QueryBuilderComponent {
         console.log(error);
       }
     );
-    // console.log(startYear);
 
   };
 

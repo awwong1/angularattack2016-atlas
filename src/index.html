@@ -26,9 +26,905 @@
     }
   </script>
   -->
+  
+  <!--
+    The below css used for the loading screen anmiation is from(with minor modification):
+    http://css.michaelschrauzer.com/demos/css-rotating-globe.html
+  -->
+  <style type="text/css" title="text/css" >
+
+#demo {
+	height:100vh;
+	padding:40px;
+	overflow:hidden;
+	background:#009688;
+	}
+
+/* globe contains all latitude and meridian divs */
+/* sets perspective context */
+/* use globe width (Gw) for latitude and meridian calculations */
+#globe {
+	width:400px;
+	height:400px;
+	position:relative;
+	left:50%;
+	top:50%;
+	margin-top:-235px;
+	margin-left:-200px;
+	/* set the "tilt" of the globe (in this case equal to the tilt of the Earth's axis): */
+	-webkit-transform:rotate3d(0,0,1,23.5deg);
+	-moz-transform:rotate3d(0,0,1,23.5deg);
+	-ms-transform:rotate3d(0,0,1,23.5deg);
+	transform:rotate3d(0,0,1,23.5deg);
+	/* set the perspective distance of the globe */
+	/* values less than the radius of globe will place the viewpoint inside, with interesting results: */
+	-webkit-perspective:400px;
+	-moz-perspective:400px;
+	perspective:400px;
+	/* set the perspective view angle of the globe */
+	/* x = 50% keeps the globe centered; y value raises the viewpoint above or below the equator */
+	/* large, small, or negative values will create perspective distortions */
+	-webkit-perspective-origin:50% 36%;
+	-moz-perspective-origin:50% 36%;
+	perspective-origin:50% 36%;
+	}
+
+/* LATITUDES */
+/* L = latitude° */
+[id^="latitude"] {
+	position:absolute;
+	left:50%;
+	border-radius:100%;
+	border:solid 2px rgb(255,193,7);
+	-webkit-transform:rotateX(90deg);
+	-moz-transform:rotateX(90deg);
+	-ms-transform:rotateX(90deg);
+	transform:rotateX(90deg);
+/* uncomment to add rotation to latitudes (+keyframes)
+	-webkit-animation: rotate-L 10s linear 0s infinite;
+	-moz-animation: rotate-L 10s linear 0s infinite;
+	-ms-animation: rotate-L 10s linear 0s infinite;
+	animation: rotate-L 10s linear 0s infinite;
+ */
+	}
+/* Lw = latitude width = Gw*cos(L) */
+/* margin-left = -(Lw), or (Lw/Gw)*100% */
+#latitude-80,#latitude--80 {
+	width:69.4px;
+	height:69.4px;
+	margin-left:-8.7%;
+	}
+#latitude-70,#latitude--70 {
+	width:136.8px;
+	height:136.8px;
+	margin-left:-17.1%;
+	}
+#latitude-60,#latitude--60 {
+	width:200px;
+	height:200px;
+	margin-left:-25%;
+	}
+#latitude-50,#latitude--50 {
+	width:257px;
+	height:257px;
+	margin-left:-32.125%;
+	}
+#latitude-40,#latitude--40 {
+	width:306.4px;
+	height:306.4px;
+	margin-left:-38.3%;
+	}
+#latitude-30,#latitude--30 {
+	width:346.4px;
+	height:346.4px;
+	margin-left:-43.3%;
+	}
+#latitude-20,#latitude--20 {
+	width:375.8px;
+	height:375.8px;
+	margin-left:-46.975%;
+	}
+#latitude-10,#latitude--10 {
+	width:395.4px;
+	height:395.4px;
+	margin-left:-49.225%;
+	}
+#latitude-00 {
+	width:400px;
+	height:400px;
+	margin-left:-50%;
+	}
+/* position latitudes */
+/* margin-top = R(sinL + cosL - 1), */
+/* where R = globe radius, L = latitude in degrees */
+#latitude-80 {margin-top:-31.69px;}
+#latitude-70 {margin-top:-56.34px;}
+#latitude-60 {margin-top:-73.21px;}
+#latitude-50 {margin-top:-81.77px;}
+#latitude-40 {margin-top:-81.77px;}
+#latitude-30 {margin-top:-73.21px;}
+#latitude-20 {margin-top:-56.34px;}
+#latitude-10 {margin-top:-31.69px;}
+#latitude-00 {margin-top:0;}
+#latitude--10 {margin-top:33.77px;}
+#latitude--20 {margin-top:80.47px;}
+#latitude--30 {margin-top:126.79px;}
+#latitude--40 {margin-top:175.35px;}
+#latitude--50 {margin-top:224.65px;}
+#latitude--60 {margin-top:273.21px;}
+#latitude--70 {margin-top:319.53px;}
+#latitude--80 {margin-top:362.23px;}
+
+ /* MERIDIANS */
+[id^="meridian"] {
+	width:400px;
+	height:400px;
+	position:absolute;
+	left:50%;
+	margin-left:-200px;
+	border-radius:100%;
+	border:solid 2px rgb(255,193,7);
+	/* uncomment to play with z-origin */
+	/* transform-origin:0 0 20px; */
+	}
+
+#meridian-10 {
+	-webkit-transform:rotate3d(0,1,0,10deg);
+	-moz-transform:rotate3d(0,1,0,10deg);
+	-ms-transform:rotate3d(0,1,0,10deg);
+	transform:rotate3d(0,1,0,10deg);
+	-webkit-animation: rotate-10 10s linear 0s infinite;
+	-moz-animation: rotate-10 10s linear 0s infinite;
+	-ms-animation: rotate-10 10s linear 0s infinite;
+	animation: rotate-10 10s linear 0s infinite;
+	}
+#meridian-20 {
+	-webkit-transform: rotate3d(0,1,0,20deg);
+	-moz-transform: rotate3d(0,1,0,20deg);
+	-ms-transform: rotate3d(0,1,0,20deg);
+	transform: rotate3d(0,1,0,20deg);
+	-webkit-animation: rotate-20 10s linear 0s infinite;
+	-moz-animation: rotate-20 10s linear 0s infinite;
+	-ms-animation: rotate-20 10s linear 0s infinite;
+	animation: rotate-20 10s linear 0s infinite;
+}
+#meridian-30 {
+	-webkit-transform: rotate3d(0,1,0,30deg);
+	-moz-transform: rotate3d(0,1,0,30deg);
+	-ms-transform: rotate3d(0,1,0,30deg);
+	transform: rotate3d(0,1,0,30deg);
+	-webkit-animation: rotate-30 10s linear 0s infinite;
+	-moz-animation: rotate-30 10s linear 0s infinite;
+	-ms-animation: rotate-30 10s linear 0s infinite;
+	animation: rotate-30 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-40 {
+	-webkit-transform: rotate3d(0,1,0,40deg);
+	-moz-transform: rotate3d(0,1,0,40deg);
+	-ms-transform: rotate3d(0,1,0,40deg);
+	transform: rotate3d(0,1,0,40deg);
+	-webkit-animation: rotate-40 10s linear 0s infinite;
+	-moz-animation: rotate-40 10s linear 0s infinite;
+	-ms-animation: rotate-40 10s linear 0s infinite;
+	animation: rotate-40 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-50 {
+	-webkit-transform: rotate3d(0,1,0,50deg);
+	-moz-transform: rotate3d(0,1,0,50deg);
+	-ms-transform: rotate3d(0,1,0,50deg);
+	transform: rotate3d(0,1,0,50deg);
+	-webkit-animation: rotate-50 10s linear 0s infinite;
+	-moz-animation: rotate-50 10s linear 0s infinite;
+	-ms-animation: rotate-50 10s linear 0s infinite;
+	animation: rotate-50 10s linear 0s infinite;
+}
+#meridian-60 {
+	-webkit-transform: rotate3d(0,1,0,60deg);
+	-moz-transform: rotate3d(0,1,0,60deg);
+	-ms-transform: rotate3d(0,1,0,60deg);
+	transform: rotate3d(0,1,0,60deg);
+	-webkit-animation: rotate-60 10s linear 0s infinite;
+	-moz-animation: rotate-60 10s linear 0s infinite;
+	-ms-animation: rotate-60 10s linear 0s infinite;
+	animation: rotate-60 10s linear 0s infinite;
+}
+#meridian-70 {
+	-webkit-transform: rotate3d(0,1,0,70deg);
+	-moz-transform: rotate3d(0,1,0,70deg);
+	-ms-transform: rotate3d(0,1,0,70deg);
+	transform: rotate3d(0,1,0,70deg);
+	-webkit-animation: rotate-70 10s linear 0s infinite;
+	-moz-animation: rotate-70 10s linear 0s infinite;
+	-ms-animation: rotate-70 10s linear 0s infinite;
+	animation: rotate-70 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-80 {
+	-webkit-transform: rotate3d(0,1,0,80deg);
+	-moz-transform: rotate3d(0,1,0,80deg);
+	-ms-transform: rotate3d(0,1,0,80deg);
+	transform: rotate3d(0,1,0,80deg);
+	-webkit-animation: rotate-80 10s linear 0s infinite;
+	-moz-animation: rotate-80 10s linear 0s infinite;
+	-ms-animation: rotate-80 10s linear 0s infinite;
+	animation: rotate-80 10s linear 0s infinite;
+}
+#meridian-90 {
+	-webkit-transform: rotate3d(0,1,0,90deg);
+	-moz-transform: rotate3d(0,1,0,90deg);
+	-ms-transform: rotate3d(0,1,0,90deg);
+	transform: rotate3d(0,1,0,90deg);
+	-webkit-animation: rotate-90 10s linear 0s infinite;
+	-moz-animation: rotate-90 10s linear 0s infinite;
+	-ms-animation: rotate-90 10s linear 0s infinite;
+	animation: rotate-90 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-100 {
+	-webkit-transform: rotate3d(0,1,0,100deg);
+	-moz-transform: rotate3d(0,1,0,100deg);
+	-ms-transform: rotate3d(0,1,0,100deg);
+	transform: rotate3d(0,1,0,100deg);
+	-webkit-animation: rotate-100 10s linear 0s infinite;
+	-moz-animation: rotate-100 10s linear 0s infinite;
+	-ms-animation: rotate-100 10s linear 0s infinite;
+	animation: rotate-100 10s linear 0s infinite;
+}
+#meridian-110 {
+	-webkit-transform: rotate3d(0,1,0,110deg);
+	-moz-transform: rotate3d(0,1,0,110deg);
+	-ms-transform: rotate3d(0,1,0,110deg);
+	transform: rotate3d(0,1,0,110deg);
+	-webkit-animation: rotate-110 10s linear 0s infinite;
+	-moz-animation: rotate-110 10s linear 0s infinite;
+	-ms-animation: rotate-110 10s linear 0s infinite;
+	animation: rotate-110 10s linear 0s infinite;
+}
+#meridian-120 {
+	-webkit-transform: rotate3d(0,1,0,120deg);
+	-moz-transform: rotate3d(0,1,0,120deg);
+	-ms-transform: rotate3d(0,1,0,120deg);
+	transform: rotate3d(0,1,0,120deg);
+	-webkit-animation: rotate-120 10s linear 0s infinite;
+	-moz-animation: rotate-120 10s linear 0s infinite;
+	-ms-animation: rotate-120 10s linear 0s infinite;
+	animation: rotate-120 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-130 {
+	-webkit-transform: rotate3d(0,1,0,130deg);
+	-moz-transform: rotate3d(0,1,0,130deg);
+	-ms-transform: rotate3d(0,1,0,130deg);
+	transform: rotate3d(0,1,0,130deg);
+	-webkit-animation: rotate-130 10s linear 0s infinite;
+	-moz-animation: rotate-130 10s linear 0s infinite;
+	-ms-animation: rotate-130 10s linear 0s infinite;
+	animation: rotate-130 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-140 {
+	-webkit-transform: rotate3d(0,1,0,140deg);
+	-moz-transform: rotate3d(0,1,0,140deg);
+	-ms-transform: rotate3d(0,1,0,140deg);
+	transform: rotate3d(0,1,0,140deg);
+	-webkit-animation: rotate-140 10s linear 0s infinite;
+	-moz-animation: rotate-140 10s linear 0s infinite;
+	-ms-animation: rotate-140 10s linear 0s infinite;
+	animation: rotate-140 10s linear 0s infinite;
+}
+#meridian-150 {
+	-webkit-transform: rotate3d(0,1,0,150deg);
+	-moz-transform: rotate3d(0,1,0,150deg);
+	-ms-transform: rotate3d(0,1,0,150deg);
+	transform: rotate3d(0,1,0,150deg);
+	-webkit-animation: rotate-150 10s linear 0s infinite;
+	-moz-animation: rotate-150 10s linear 0s infinite;
+	-ms-animation: rotate-150 10s linear 0s infinite;
+	animation: rotate-150 10s linear 0s infinite;
+}
+#meridian-160 {
+	-webkit-transform: rotate3d(0,1,0,160deg);
+	-moz-transform: rotate3d(0,1,0,160deg);
+	-ms-transform: rotate3d(0,1,0,160deg);
+	transform: rotate3d(0,1,0,160deg);
+	-webkit-animation: rotate-160 10s linear 0s infinite;
+	-moz-animation: rotate-160 10s linear 0s infinite;
+	-ms-animation: rotate-160 10s linear 0s infinite;
+	animation: rotate-160 10s linear 0s infinite;
+}
+#meridian-170 {
+	-webkit-transform: rotate3d(0,1,0,170deg);
+	-moz-transform: rotate3d(0,1,0,170deg);
+	-ms-transform: rotate3d(0,1,0,170deg);
+	transform: rotate3d(0,1,0,170deg);
+	-webkit-animation: rotate-170 10s linear 0s infinite;
+	-moz-animation: rotate-170 10s linear 0s infinite;
+	-ms-animation: rotate-170 10s linear 0s infinite;
+	animation: rotate-170 10s linear 0s infinite;
+}
+/* reversed rotation in safari */
+#meridian-180 {
+	-webkit-transform: rotate3d(0,1,0,180deg);
+	-moz-transform: rotate3d(0,1,0,180deg);
+	-ms-transform: rotate3d(0,1,0,180deg);
+	transform: rotate3d(0,1,0,180deg);
+	-webkit-animation: rotate-180 10s linear 0s infinite;
+	-moz-animation: rotate-180 10s linear 0s infinite;
+	-ms-animation: rotate-180 10s linear 0s infinite;
+	animation: rotate-180 10s linear 0s infinite;
+}
+/* ANIMATION KEYFRAMES, with complete icky vendor prefixes */
+@keyframes "rotate-10" {
+ 0% {-webkit-transform: rotate3d(0,1,0,10deg);
+   	-moz-transform: rotate3d(0,1,0,10deg);
+   	-ms-transform: rotate3d(0,1,0,10deg);
+   	transform: rotate3d(0,1,0,10deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,190deg);
+   	-moz-transform: rotate3d(0,1,0,190deg);
+   	-ms-transform: rotate3d(0,1,0,190deg);
+   	transform: rotate3d(0,1,0,190deg); }
+	}
+@-moz-keyframes rotate-10 {
+ 0% {-moz-transform: rotate3d(0,1,0,10deg);
+   transform: rotate3d(0,1,0,10deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,-190deg);
+   transform: rotate3d(0,1,0,190deg); }
+	}
+@-webkit-keyframes "rotate-10" {
+ 0% {-webkit-transform: rotate3d(0,1,0,10deg);
+   transform: rotate3d(0,1,0,10deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,190deg);
+   transform: rotate3d(0,1,0,190deg); }
+	}
+@-ms-keyframes "rotate-10" {
+ 0% {-ms-transform: rotate3d(0,1,0,10deg);
+   transform: rotate3d(0,1,0,10deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,190deg);
+   transform: rotate3d(0,1,0,190deg); }
+	}
+
+@keyframes "rotate-20" {
+ 0% {-webkit-transform: rotate3d(0,1,0,20deg);
+   	-moz-transform: rotate3d(0,1,0,20deg);
+   	-ms-transform: rotate3d(0,1,0,20deg);
+   	transform: rotate3d(0,1,0,20deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,200deg);
+   	-moz-transform: rotate3d(0,1,0,200deg);
+   	-ms-transform: rotate3d(0,1,0,200deg);
+   	transform: rotate3d(0,1,0,200deg); }
+	}
+@-moz-keyframes rotate-20 {
+ 0% {-moz-transform: rotate3d(0,1,0,20deg);
+   transform: rotate3d(0,1,0,20deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,200deg);
+   transform: rotate3d(0,1,0,200deg); }
+	}
+@-webkit-keyframes "rotate-20" {
+ 0% {-webkit-transform: rotate3d(0,1,0,20deg);
+   transform: rotate3d(0,1,0,20deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,200deg);
+   transform: rotate3d(0,1,0,200deg); }
+	}
+@-ms-keyframes "rotate-20" {
+ 0% {-ms-transform: rotate3d(0,1,0,20deg);
+   transform: rotate3d(0,1,0,20deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,200deg);
+   transform: rotate3d(0,1,0,200deg); }
+	}
+
+@keyframes "rotate-30" {
+ 0% {transform: rotate3d(0,1,0,30deg); }
+ 100% {transform: rotate3d(0,1,0,210deg); }
+	}
+@-moz-keyframes rotate-30 {
+ 0% {-moz-transform: rotate3d(0,1,0,30deg);
+   transform: rotate3d(0,1,0,30deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,210deg);
+   transform: rotate3d(0,1,0,210deg); }
+	}
+@-webkit-keyframes "rotate-30" {
+ 0% {-webkit-transform: rotate3d(0,1,0,30deg);
+   transform: rotate3d(0,1,0,30deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,210deg);
+   transform: rotate3d(0,1,0,210deg); }
+	}
+@-ms-keyframes "rotate-30" {
+ 0% {-ms-transform: rotate3d(0,1,0,30deg);
+   transform: rotate3d(0,1,0,30deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,210deg);
+   transform: rotate3d(0,1,0,210deg); }
+	}
+
+@keyframes "rotate-40" {
+ 0% {-webkit-transform: rotate3d(0,1,0,40deg);
+   	-moz-transform: rotate3d(0,1,0,40deg);
+   	-ms-transform: rotate3d(0,1,0,40deg);
+   	transform: rotate3d(0,1,0,40deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,220deg);
+   	-moz-transform: rotate3d(0,1,0,220deg);
+   	-ms-transform: rotate3d(0,1,0,220deg);
+   	transform: rotate3d(0,1,0,220deg); }
+	}
+@-moz-keyframes rotate-40 {
+ 0% {-moz-transform: rotate3d(0,1,0,40deg);
+   transform: rotate3d(0,1,0,40deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,220deg);
+   transform: rotate3d(0,1,0,220deg); }
+	}
+@-webkit-keyframes "rotate-40" {
+ 0% {-webkit-transform: rotate3d(0,1,0,40deg);
+   transform: rotate3d(0,1,0,40deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,220deg);
+   transform: rotate3d(0,1,0,220deg); }
+	}
+@-ms-keyframes "rotate-40" {
+ 0% {-ms-transform: rotate3d(0,1,0,40deg);
+   transform: rotate3d(0,1,0,40deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,220deg);
+   transform: rotate3d(0,1,0,220deg); }
+	}
+
+@keyframes "rotate-50" {
+ 0% {-webkit-transform: rotate3d(0,1,0,50deg);
+   	-moz-transform: rotate3d(0,1,0,0turn);
+   	-ms-transform: rotate3d(0,1,0,50deg);
+   	transform: rotate3d(0,1,0,50deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,230deg);
+   	-moz-transform: rotate3d(0,1,0,230deg);
+   	-ms-transform: rotate3d(0,1,0,230deg);
+   	transform: rotate3d(0,1,0,230deg); }
+	}
+@-moz-keyframes rotate-50 {
+ 0% {-moz-transform: rotate3d(0,1,0,50deg);
+   transform: rotate3d(0,1,0,50deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,230deg);
+   transform: rotate3d(0,1,0,230deg); }
+	}
+@-webkit-keyframes "rotate-50" {
+ 0% {-webkit-transform: rotate3d(0,1,0,50deg);
+   transform: rotate3d(0,1,0,50deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,230deg);
+   transform: rotate3d(0,1,0,230deg); }
+	}
+@-ms-keyframes "rotate-50" {
+ 0% {-ms-transform: rotate3d(0,1,0,50deg);
+   transform: rotate3d(0,1,0,50deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,230deg);
+   transform: rotate3d(0,1,0,230deg); }
+	}
+
+@keyframes "rotate-60" {
+ 0% {-webkit-transform: rotate3d(0,1,0,60deg);
+   	-moz-transform: rotate3d(0,1,0,60deg);
+   	-ms-transform: rotate3d(0,1,0,60deg);
+   	transform: rotate3d(0,1,0,60deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,240deg);
+   	-moz-transform: rotate3d(0,1,0,240deg);
+   	-ms-transform: rotate3d(0,1,0,240deg);
+   	transform: rotate3d(0,1,0,240deg); }
+	}
+@-moz-keyframes rotate-60 {
+ 0% {-moz-transform: rotate3d(0,1,0,60deg);
+   transform: rotate3d(0,1,0,60deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,240deg);
+   transform: rotate3d(0,1,0,240deg); }
+	}
+@-webkit-keyframes "rotate-60" {
+ 0% {-webkit-transform: rotate3d(0,1,0,60deg);
+   transform: rotate3d(0,1,0,60deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,240deg);
+   transform: rotate3d(0,1,0,240deg); }
+	}
+@-ms-keyframes "rotate-60" {
+ 0% {-ms-transform: rotate3d(0,1,0,60deg);
+   transform: rotate3d(0,1,0,60deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,240deg);
+   transform: rotate3d(0,1,0,240deg); }
+	}
+
+@keyframes "rotate-70" {
+ 0% {-webkit-transform: rotate3d(0,1,0,70deg);
+   	-moz-transform: rotate3d(0,1,0,70deg);
+   	-ms-transform: rotate3d(0,1,0,70deg);
+   	transform: rotate3d(0,1,0,70deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,250deg);
+   	-moz-transform: rotate3d(0,1,0,250deg);
+   	-ms-transform: rotate3d(0,1,0,250deg);
+   	transform: rotate3d(0,1,0,250deg); }
+	}
+@-moz-keyframes rotate-70 {
+ 0% {-moz-transform: rotate3d(0,1,0,70deg);
+   transform: rotate3d(0,1,0,70deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,250deg);
+   transform: rotate3d(0,1,0,250deg); }
+	}
+@-webkit-keyframes "rotate-70" {
+ 0% {-webkit-transform: rotate3d(0,1,0,70deg);
+   transform: rotate3d(0,1,0,70deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,250deg);
+   transform: rotate3d(0,1,0,250deg); }
+	}
+@-ms-keyframes "rotate-70" {
+ 0% {-ms-transform: rotate3d(0,1,0,70deg);
+   transform: rotate3d(0,1,0,70deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,250deg);
+   transform: rotate3d(0,1,0,250deg); }
+	}
+
+@keyframes "rotate-80" {
+ 0% {-webkit-transform: rotate3d(0,1,0,80deg);
+   	-moz-transform: rotate3d(0,1,0,80deg);
+   	-ms-transform: rotate3d(0,1,0,80deg);
+   	transform: rotate3d(0,1,0,80deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,260deg);
+   	-moz-transform: rotate3d(0,1,0,260deg);
+   	-ms-transform: rotate3d(0,1,0,260deg);
+   	transform: rotate3d(0,1,0,260deg); }
+	}
+@-moz-keyframes rotate-80 {
+ 0% {-moz-transform: rotate3d(0,1,0,80deg);
+   transform: rotate3d(0,1,0,80deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,260deg);
+   transform: rotate3d(0,1,0,260deg); }
+	}
+@-webkit-keyframes "rotate-80" {
+ 0% {-webkit-transform: rotate3d(0,1,0,80deg);
+   transform: rotate3d(0,1,0,80deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,260deg);
+   transform: rotate3d(0,1,0,260deg); }
+	}
+@-ms-keyframes "rotate-80" {
+ 0% {-ms-transform: rotate3d(0,1,0,80deg);
+   transform: rotate3d(0,1,0,80deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,260deg);
+   transform: rotate3d(0,1,0,260deg); }
+	}
+
+@keyframes "rotate-90" {
+ 0% {-webkit-transform: rotate3d(0,1,0,90deg);
+   	-moz-transform: rotate3d(0,1,0,90deg);
+   	-ms-transform: rotate3d(0,1,0,90deg);
+   	transform: rotate3d(0,1,0,90deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,270deg);
+   	-moz-transform: rotate3d(0,1,0,270deg);
+   	-ms-transform: rotate3d(0,1,0,270deg);
+   	transform: rotate3d(0,1,0,270deg); }
+	}
+@-moz-keyframes rotate-90 {
+ 0% {-moz-transform: rotate3d(0,1,0,90deg);
+   transform: rotate3d(0,1,0,90deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,270deg);
+   transform: rotate3d(0,1,0,270deg); }
+	}
+@-webkit-keyframes "rotate-90" {
+ 0% {-webkit-transform: rotate3d(0,1,0,90deg);
+   transform: rotate3d(0,1,0,90deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,270deg);
+   transform: rotate3d(0,1,0,270deg); }
+	}
+@-ms-keyframes "rotate-90" {
+ 0% {-ms-transform: rotate3d(0,1,0,90deg);
+   transform: rotate3d(0,1,0,90deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,270deg);
+   transform: rotate3d(0,1,0,270deg); }
+	}
+
+@keyframes "rotate-100" {
+ 0% {-webkit-transform: rotate3d(0,1,0,100deg);
+   	-moz-transform: rotate3d(0,1,0,100deg);
+   	-ms-transform: rotate3d(0,1,0,100deg);
+   	transform: rotate3d(0,1,0,100deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,280deg);
+   	-moz-transform: rotate3d(0,1,0,280deg);
+   	-ms-transform: rotate3d(0,1,0,280deg);
+   	transform: rotate3d(0,1,0,280deg); }
+	}
+@-moz-keyframes rotate-100 {
+ 0% {-moz-transform: rotate3d(0,1,0,100deg);
+   transform: rotate3d(0,1,0,100deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,280deg);
+   transform: rotate3d(0,1,0,280deg); }
+	}
+@-webkit-keyframes "rotate-100" {
+ 0% {-webkit-transform: rotate3d(0,1,0,100deg);
+   transform: rotate3d(0,1,0,100deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,280deg);
+   transform: rotate3d(0,1,0,280deg); }
+	}
+@-ms-keyframes "rotate-100" {
+ 0% {-ms-transform: rotate3d(0,1,0,100deg);
+   transform: rotate3d(0,1,0,100deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,280deg);
+   transform: rotate3d(0,1,0,280deg); }
+	}
+
+@keyframes "rotate-110" {
+ 0% {-webkit-transform: rotate3d(0,1,0,110deg);
+   	-moz-transform: rotate3d(0,1,0,110deg);
+   	-ms-transform: rotate3d(0,1,0,110deg);
+   	transform: rotate3d(0,1,0,110deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,290deg);
+   	-moz-transform: rotate3d(0,1,0,290deg);
+   	-ms-transform: rotate3d(0,1,0,290deg);
+   	transform: rotate3d(0,1,0,290deg); }
+	}
+@-moz-keyframes rotate-110 {
+ 0% {-moz-transform: rotate3d(0,1,0,110deg);
+   transform: rotate3d(0,1,0,110deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,290deg);
+   transform: rotate3d(0,1,0,290deg); }
+	}
+@-webkit-keyframes "rotate-110" {
+ 0% {-webkit-transform: rotate3d(0,1,0,110deg);
+   transform: rotate3d(0,1,0,110deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,290deg);
+   transform: rotate3d(0,1,0,290deg); }
+	}
+@-ms-keyframes "rotate-110" {
+ 0% {-ms-transform: rotate3d(0,1,0,110deg);
+   transform: rotate3d(0,1,0,110deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,290deg);
+   transform: rotate3d(0,1,0,290deg); }
+	}
+
+@keyframes "rotate-120" {
+ 0% {-webkit-transform: rotate3d(0,1,0,120deg);
+   	-moz-transform: rotate3d(0,1,0,120deg);
+   	-ms-transform: rotate3d(0,1,0,120deg);
+   	transform: rotate3d(0,1,0,120deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,300deg);
+   	-moz-transform: rotate3d(0,1,0,300deg);
+   	-ms-transform: rotate3d(0,1,0,300deg);
+   	transform: rotate3d(0,1,0,300deg); }
+	}
+@-moz-keyframes rotate-120 {
+ 0% {-moz-transform: rotate3d(0,1,0,120deg);
+   transform: rotate3d(0,1,0,120deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,300deg);
+   transform: rotate3d(0,1,0,300deg); }
+	}
+@-webkit-keyframes "rotate-120" {
+ 0% {-webkit-transform: rotate3d(0,1,0,120deg);
+   transform: rotate3d(0,1,0,120deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,300deg);
+   transform: rotate3d(0,1,0,300deg); }
+	}
+@-ms-keyframes "rotate-120" {
+ 0% {-ms-transform: rotate3d(0,1,0,120deg);
+   transform: rotate3d(0,1,0,120deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,300deg);
+   transform: rotate3d(0,1,0,300deg); }
+	}
+
+@keyframes "rotate-130" {
+ 0% {-webkit-transform: rotate3d(0,1,0,130deg);
+   	-moz-transform: rotate3d(0,1,0,130deg);
+   	-ms-transform: rotate3d(0,1,0,130deg);
+   	transform: rotate3d(0,1,0,130deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,310deg);
+   	-moz-transform: rotate3d(0,1,0,310deg);
+   	-ms-transform: rotate3d(0,1,0,310deg);
+   	transform: rotate3d(0,1,0,310deg); }
+	}
+@-moz-keyframes rotate-130 {
+ 0% {-moz-transform: rotate3d(0,1,0,130deg);
+   transform: rotate3d(0,1,0,130deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,310deg);
+   transform: rotate3d(0,1,0,310deg); }
+	}
+@-webkit-keyframes "rotate-130" {
+ 0% {-webkit-transform: rotate3d(0,1,0,130deg);
+   transform: rotate3d(0,1,0,130deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,310deg);
+   transform: rotate3d(0,1,0,310deg); }
+	}
+@-ms-keyframes "rotate-130" {
+ 0% {-ms-transform: rotate3d(0,1,0,130deg);
+   transform: rotate3d(0,1,0,130deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,310deg);
+   transform: rotate3d(0,1,0,310deg); }
+	}
+
+@keyframes "rotate-140" {
+ 0% {-webkit-transform: rotate3d(0,1,0,140deg);
+   	-moz-transform: rotate3d(0,1,0,140deg);
+   	-ms-transform: rotate3d(0,1,0,140deg);
+   	transform: rotate3d(0,1,0,140deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,320deg);
+   	-moz-transform: rotate3d(0,1,0,320deg);
+   	-ms-transform: rotate3d(0,1,0,320deg);
+   	transform: rotate3d(0,1,0,320deg); }
+	}
+@-moz-keyframes rotate-140 {
+ 0% {-moz-transform: rotate3d(0,1,0,140deg);
+   transform: rotate3d(0,1,0,140deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,320deg);
+   transform: rotate3d(0,1,0,320deg); }
+	}
+@-webkit-keyframes "rotate-140" {
+ 0% {-webkit-transform: rotate3d(0,1,0,140deg);
+   transform: rotate3d(0,1,0,140deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,320deg);
+   transform: rotate3d(0,1,0,320deg); }
+	}
+@-ms-keyframes "rotate-140" {
+ 0% {-ms-transform: rotate3d(0,1,0,140deg);
+   transform: rotate3d(0,1,0,140deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,320deg);
+   transform: rotate3d(0,1,0,320deg); }
+	}
+
+@keyframes "rotate-150" {
+ 0% {-webkit-transform: rotate3d(0,1,0,150deg);
+   	-moz-transform: rotate3d(0,1,0,150deg);
+   	-ms-transform: rotate3d(0,1,0,150deg);
+   	transform: rotate3d(0,1,0,150deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,330deg);
+   	-moz-transform: rotate3d(0,1,0,330deg);
+   	-ms-transform: rotate3d(0,1,0,330deg);
+   	transform: rotate3d(0,1,0,330deg); }
+	}
+@-moz-keyframes rotate-150 {
+ 0% {-moz-transform: rotate3d(0,1,0,150deg);
+   transform: rotate3d(0,1,0,150deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,330deg);
+   transform: rotate3d(0,1,0,330deg); }
+	}
+@-webkit-keyframes "rotate-150" {
+ 0% {-webkit-transform: rotate3d(0,1,0,150deg);
+   transform: rotate3d(0,1,0,150deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,330deg);
+   transform: rotate3d(0,1,0,330deg); }
+	}
+@-ms-keyframes "rotate-150" {
+ 0% {-ms-transform: rotate3d(0,1,0,150deg);
+   transform: rotate3d(0,1,0,150deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,330deg);
+   transform: rotate3d(0,1,0,330deg); }
+	}
+
+@keyframes "rotate-160" {
+ 0% {-webkit-transform: rotate3d(0,1,0,160deg);
+   	-moz-transform: rotate3d(0,1,0,160deg);
+   	-ms-transform: rotate3d(0,1,0,160deg);
+   	transform: rotate3d(0,1,0,160deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,340deg);
+   	-moz-transform: rotate3d(0,1,0,340deg);
+   	-ms-transform: rotate3d(0,1,0,340deg);
+   	transform: rotate3d(0,1,0,340deg); }
+	}
+@-moz-keyframes rotate-160 {
+ 0% {-moz-transform: rotate3d(0,1,0,160deg);
+   transform: rotate3d(0,1,0,160deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,340deg);
+   transform: rotate3d(0,1,0,340deg); }
+	}
+@-webkit-keyframes "rotate-160" {
+ 0% {-webkit-transform: rotate3d(0,1,0,160deg);
+   transform: rotate3d(0,1,0,160deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,340deg);
+   transform: rotate3d(0,1,0,340deg); }
+	}
+@-ms-keyframes "rotate-160" {
+ 0% {-ms-transform: rotate3d(0,1,0,160deg);
+   transform: rotate3d(0,1,0,160deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,340deg);
+   transform: rotate3d(0,1,0,340deg); }
+	}
+
+@keyframes "rotate-170" {
+ 0% {-webkit-transform: rotate3d(0,1,0,170deg);
+   	-moz-transform: rotate3d(0,1,0,170deg);
+   	-ms-transform: rotate3d(0,1,0,170deg);
+   	transform: rotate3d(0,1,0,170deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,350deg);
+   	-moz-transform: rotate3d(0,1,0,350deg);
+   	-ms-transform: rotate3d(0,1,0,350deg);
+   	transform: rotate3d(0,1,0,350deg); }
+	}
+@-moz-keyframes rotate-170 {
+ 0% {-moz-transform: rotate3d(0,1,0,170deg);
+   transform: rotate3d(0,1,0,170deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,350deg);
+   transform: rotate3d(0,1,0,350deg); }
+	}
+@-webkit-keyframes "rotate-170" {
+ 0% {-webkit-transform: rotate3d(0,1,0,170deg);
+   transform: rotate3d(0,1,0,170deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,350deg);
+   transform: rotate3d(0,1,0,350deg); }
+	}
+@-ms-keyframes "rotate-170" {
+ 0% {-ms-transform: rotate3d(0,1,0,170deg);
+   transform: rotate3d(0,1,0,170deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,350deg);
+   transform: rotate3d(0,1,0,350deg); }
+	}
+
+@keyframes "rotate-180" {
+ 0% {-webkit-transform: rotate3d(0,1,0,180deg);
+   	-moz-transform: rotate3d(0,1,0,180deg);
+   	-ms-transform: rotate3d(0,1,0,180deg);
+   	transform: rotate3d(0,1,0,180deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,360deg);
+   	-moz-transform: rotate3d(0,1,0,360deg);
+   	-ms-transform: rotate3d(0,1,0,360deg);
+   	transform: rotate3d(0,1,0,360deg); }
+	}
+@-moz-keyframes rotate-180 {
+ 0% {-moz-transform: rotate3d(0,1,0,180deg);
+   transform: rotate3d(0,1,0,180deg); }
+ 100% {-moz-transform: rotate3d(0,1,0,360deg);
+   transform: rotate3d(0,1,0,360deg); }
+	}
+@-webkit-keyframes "rotate-180" {
+ 0% {-webkit-transform: rotate3d(0,1,0,180deg);
+   transform: rotate3d(0,1,0,180deg); }
+ 100% {-webkit-transform: rotate3d(0,1,0,360deg);
+   transform: rotate3d(0,1,0,360deg); }
+	}
+@-ms-keyframes "rotate-180" {
+ 0% {-ms-transform: rotate3d(0,1,0,180deg);
+   transform: rotate3d(0,1,0,180deg); }
+ 100% {-ms-transform: rotate3d(0,1,0,360deg);
+   transform: rotate3d(0,1,0,360deg); }
+	}
+
+</style>
 </head>
+
 <body>
-  <atlas-app>Loading...</atlas-app>
+  <atlas-app>
+    <section id="demo" class="clearfix">
+
+<!--
+  http://css.michaelschrauzer.com/demos/css-rotating-globe.html
+-->
+<div id="globe">
+
+<div id="meridian-10"></div>
+<div id="meridian-20"></div>
+<div id="meridian-30"></div>
+<div id="meridian-40"></div>
+<div id="meridian-50"></div>
+<div id="meridian-60"></div>
+<div id="meridian-70"></div>
+<div id="meridian-80"></div>
+<div id="meridian-90"></div>
+<div id="meridian-100"></div>
+<div id="meridian-110"></div>
+<div id="meridian-120"></div>
+<div id="meridian-130"></div>
+<div id="meridian-140"></div>
+<div id="meridian-150"></div>
+<div id="meridian-160"></div>
+<div id="meridian-170"></div>
+<div id="meridian-180"></div>
+
+<div id="latitude-80"></div>
+<div id="latitude-70"></div>
+<div id="latitude-60"></div>
+<div id="latitude-50"></div>
+<div id="latitude-40"></div>
+<div id="latitude-30"></div>
+<div id="latitude-20"></div>
+<div id="latitude-10"></div>
+<div id="latitude-00"></div>
+<div id="latitude--10"></div>
+<div id="latitude--20"></div>
+<div id="latitude--30"></div>
+<div id="latitude--40"></div>
+<div id="latitude--50"></div>
+<div id="latitude--60"></div>
+<div id="latitude--70"></div>
+<div id="latitude--80"></div>
+
+</div>
+
+
+	</section></atlas-app>
 
   <script type="text/javascript" src="vendor/es6-shim/es6-shim.js"></script>
   <script type="text/javascript" src="vendor/reflect-metadata/Reflect.js"></script>
@@ -46,24 +942,6 @@
     System.import('system-config.js').then(function () {
       System.import('main');
     }).catch(console.error.bind(console));
-
-    System.config({
-      defaultJSExtensions: true,
-      packages: {
-        "materialize-css": {
-          "main": "dist/js/materialize"
-        },
-        "materialize": {
-          "main": "dist/materialize-directive",
-          "defaultExtension": "js"
-        }
-      },
-      map: {
-        "materialize-css": "vendor/materialize-css",
-        "materialize": "vendor/angular2-materialize",
-        "angular2-materialize": "vendor/angular2-materialize"
-      }
-    });
   </script>
 </body>
 </html>

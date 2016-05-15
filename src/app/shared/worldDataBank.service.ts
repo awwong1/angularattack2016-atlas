@@ -9,7 +9,7 @@ import {Indicator} from './indicator';
 
 @Injectable()
 export class WorldDataBankService {
-
+  private static dataPoints:Array<DataPoint> = [];
   // we were stuck on https://github.com/angular/angular/issues/6583
   // for about 2 hours. so now we're using this https://crossorigin.me
   // because holy shit it is magic for CORS
@@ -17,7 +17,10 @@ export class WorldDataBankService {
 
   constructor(private http:Http) {
   }
-
+  public getDataPoints= function() {
+    // console.log(WorldDataBankService.dataPoints);
+    return WorldDataBankService.dataPoints;
+  }
   public execute(url:string):Observable<DataPoint[]> {
     return this.http.get(WorldDataBankService.corsMagic + url)
       .map(WorldDataBankService.extractData)
@@ -29,7 +32,7 @@ export class WorldDataBankService {
       throw new Error('Response status: ' + res.status);
     }
     let body = res.json() || [];
-    let dataPoints:Array<DataPoint> = [];
+    // let dataPoints:Array<DataPoint> = [];
     // response should be an array of length 1 on nodata/error or length 2 on daa
     if (body.length === 2) {
       for (var rawDataPoint of body[1]) {
@@ -49,12 +52,12 @@ export class WorldDataBankService {
         dataPoint.decimal = rawDataPoint.decimal;
         dataPoint.value = rawDataPoint.value;
 
-        dataPoints.push(dataPoint);
+        WorldDataBankService.dataPoints.push(dataPoint);
       }
     }
-    return dataPoints;
+    return true;
   }
-
+  
   private static handleError(error:any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg = error.message || 'Server error';

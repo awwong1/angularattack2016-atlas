@@ -3,11 +3,27 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  "materialize-css": "vendor/materialize-css",
+  "materialize": "vendor/angular2-materialize",
+  "angular2-materialize": "vendor/angular2-materialize",
+  "c3": "vendor/c3",
+  "d3": "vendor/d3"
 };
 
 /** User packages configuration. */
 const packages: any = {
+  "materialize-css": {
+    "main": "dist/js/materialize"
+   },
+   "materialize": {
+    "main": "dist/materialize-directive",
+    "defaultExtension": "js"
+   }, 
+   "c3" : {"main" : "c3", "defaultExtension": "js"},
+   "d3" : {"main" : "d3", "defaultExtension": "js"}
 };
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -51,4 +67,8 @@ System.config({
 });
 
 // Apply the user's configuration.
-System.config({ map, packages });
+System.config({ 
+  defaultJSExtensions: true,
+  map, 
+  packages 
+});
