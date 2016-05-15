@@ -56,12 +56,13 @@ export class QueryBuilderComponent {
     var endYear:number = new Date(this.endDate).getFullYear();
     var indicatorCode:string = this.indicator;
     var countryList = "";
-    var resultQuery = "http://api.worldbank.org/countries/"
+    var resultQuery = "http://api.worldbank.org/countries/";
     //BHS/indicators/AG.LND.TRAC.ZS?per_page=100&date=1960:2016&format=json
     var selectedCountries = this.countries.filter((item) => {
       return item.selected === true;
     });
     for (var country in selectedCountries) {
+      if (!(selectedCountries.hasOwnProperty(country))) continue;
       countryList += selectedCountries[country].id + ";";
     }
     //Remove trailing semi-colon, may not be necesssary
@@ -70,9 +71,9 @@ export class QueryBuilderComponent {
     // This query includes the months, but those seem to break the year range, so I'm just going with the year range for now
     //resultQuery += countryList+"/indicators/"+indicatorCode+"?per_page=10000&date="+startYear+"M"+this.pad(startMonth)+":"+endYear+"M"+this.pad(endMonth)+"&format=json"
     resultQuery += countryList + "/indicators/" + indicatorCode + "?per_page=10000&date=" + startYear + ":" + endYear + "&format=json";
-    console.log(resultQuery);
     this.worldDataBankService.execute(resultQuery).subscribe(
       worldDataBankResponse => {
+        // todo: Do something with this
         console.log(worldDataBankResponse);
       },
       error => {

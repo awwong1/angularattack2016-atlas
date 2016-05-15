@@ -1,14 +1,10 @@
 import {Country} from './country';
 import {Indicator} from './indicator';
 
-export class WorldDataBankResponse {
-    points:[DataPoint];
-}
-
 export class DataPoint {
-    indicator:Indicator;
     country:Country;
+    indicator:Indicator;
     value:any;
     decimal:string;
-    data:string;
+    date:string;
 }
