@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestMethod, RequestOptions, Request} from '@angular/http';
+import {Http, Response} from '@angular/http';
+
+import {Observable} from 'rxjs/observable';
+
+import {WorldDataBankResponse} from './worldDataBank';
 
 @Injectable()
 export class WorldDataBankService {
@@ -12,37 +16,24 @@ export class WorldDataBankService {
   constructor(private http:Http) {
   }
 
-// Domain you wish to allow
-  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  //
-  // // Request methods you wish to allow
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  //
-  // // Request headers you wish to allow
-  // res.setHeader('Access-Control-Allow-Headers', 'YOUR-CUSTOM-HEADERS-HERE');
-  //
-  // // Set to true if you need the website to include cookies in  requests
-  // res.setHeader('Access-Control-Allow-Credentials', true);
-
-  execute(url:string):Promise<any> {
+  public execute(url:string):Observable<WorldDataBankResponse> {
     return this.http.get(WorldDataBankService.corsMagic + url)
-      .toPromise()
-      .then(this.extractData)
-      .catch(this.handleError);
+      .map(WorldDataBankService.extractData)
+      .catch(WorldDataBankService.handleError);
   }
 
-  private extractData(res:Response) {
+  private static extractData(res:Response) {
     if (res.status < 200 || res.status >= 300) {
-      throw new Error('Bad response status: ' + res.status);
+      throw new Error('Response status: ' + res.status);
     }
-    let body = res.json();
-    return body.data || {};
+    let body = res.json() || {};
+    return body;
   }
 
-  private handleError(error:any) {
-    // In a real world app, we might send the error to remote logging infrastructure
+  private static handleError(error:any) {
+    // In a real world app, we might use a remote logging infrastructure
     let errMsg = error.message || 'Server error';
     console.error(errMsg); // log to console instead
-    return Promise.reject(errMsg);
+    return Observable.throw(errMsg);
   }
 }
