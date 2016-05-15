@@ -371,11 +371,11 @@ export class QueryBuilderComponent {
       this.tIndicators.push(tempIndicator);
     }
 
-    console.log('getting countries');
+    // console.log('getting countries');
     this.countryService.getCountries()
       .subscribe(
         countries => {
-          console.log('got countries');
+          // console.log('got countries');
           for (var tCountry of countries) {
             this.countries.push(tCountry);
           }

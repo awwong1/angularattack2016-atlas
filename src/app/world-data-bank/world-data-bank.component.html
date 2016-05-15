@@ -1,4 +1,5 @@
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
+<blockquote>Not all indicators have complete data sets for every country/year, so many chart combinations by be incomplete.</blockquote>
 <query-builder (serviceStartEvent)="startLoading($event)" (serviceEndEvent)="wdbServiceFinished($event)"></query-builder>
 <div *ngIf="loading" class="cssload-thecube">
   <div class="cssload-cube cssload-c1"></div>

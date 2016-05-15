@@ -76,7 +76,7 @@ export class C3DisplayComponent implements OnChanges{
             }
         });
         
-        console.log(this.dataPoints);
+        // console.log(this.dataPoints);
         this.showChart = true;
         this.chartRenderComplete.emit(true);
     }
