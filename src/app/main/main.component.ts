@@ -14,4 +14,5 @@ export class MainComponent {
   riverimgurl = 'static/img/river.jpg';
   caravanimgurl = 'static/img/caravan.jpg';
   winterimgurl = 'static/img/winter.jpg';
+  spaceimgurl = 'static/img/space.jpeg';
 }
