@@ -17,6 +17,9 @@ module.exports = function(defaults) {
       'materialize-css/dist/js/*.js',
       'materialize-css/dist/fonts/roboto/*',
       'angular2-materialize/dist/*',
+      'c3/c3.css',
+      'c3/c3.min.js',
+      'd3/d3.min.js',
       '@angular/**/*.js'
     ]
   });
