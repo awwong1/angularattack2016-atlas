@@ -2,16 +2,18 @@
   <form class="col m12">
     <div class="row">
       <div class="input-field col m12">
-        <select (change)="setSelected($event.target)" id="countries" materialize="material_select" multiple [materializeSelectOptions]="selectOptions">
-          <option disabled>Select one or more Countries</option>
-          <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
-        </select>
-        <label for="countries">Country</label>
+        <input [(ngModel)]="inputCountries" (keyup)="countriesInputChanged($event)" placeholder="Country" id="inputCountries"
+               type="text" class="validate" autocomplete="off">
+        <ul>
+          <li class="dropDownList" (click)="countriesInputClicked(suggestCountry)" *ngFor="let suggestCountry of inputCountriesSuggestions">{{suggestCountry.name}}</li>
+        </ul>
+        <label for="inputCountries">Countries</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col m12">
-        <select [(ngModel)]="indicator" id="indicators" materialize="material_select" [materializeSelectOptions]="selectOptions">
+        <select [(ngModel)]="indicator" id="indicators" materialize="material_select"
+                [materializeSelectOptions]="selectOptions">
           <option disabled>Select an Indicator</option>
           <option *ngFor="let indicator of indicators" [value]="indicator.id">{{indicator.name}}</option>
         </select>
@@ -20,28 +22,32 @@
     </div>
     <div class="row">
       <div class="input-field col m6">
-        <form materialize class="col s12">
-          <label for="from">From</label>
-          <input id="from" [(ngModel)]="startDate"
-                 materialize="pickadate"
-                 [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                 type="text"/>
-        </form>
+        <label for="from">From</label>
+        <input id="from" [(ngModel)]="startDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               type="text"/>
       </div>
       <div class="input-field col m6">
-        <form materialize class="col s12">
-          <label for="from">To</label>
-          <input id="to" [(ngModel)]="endDate"
-                 materialize="pickadate"
-                 [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                 type="text"/>
-        </form>
+        <label for="from">To</label>
+        <input id="to" [(ngModel)]="endDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               type="text"/>
       </div>
     </div>
     <div class="row">
-      <button (click)="generateRequest()" class="btn waves-effect waves-light" type="submit" name="action">Generate Chart
+      <button (click)="generateRequest()" class="btn waves-effect waves-light" type="submit" name="action">Generate
+        Chart
         <i class="material-icons right">sentiment_very_satisfied</i>
       </button>
     </div>
   </form>
 </div>
+<div *ngIf="loading" class="cssload-thecube">
+	<div class="cssload-cube cssload-c1"></div>
+	<div class="cssload-cube cssload-c2"></div>
+	<div class="cssload-cube cssload-c4"></div>
+	<div class="cssload-cube cssload-c3"></div>
+</div>
+
