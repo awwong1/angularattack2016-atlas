@@ -11,9 +11,8 @@ import {MaterializeDirective} from "angular2-materialize";
 
 export class MainComponent {
   title = 'Main Page';
-  waterfallimgurl = 'static/img/waterfall.jpg';
-  riverimgurl = 'static/img/river.jpg';
-  caravanimgurl = 'static/img/caravan.jpg';
-  winterimgurl = 'static/img/winter.jpg';
+  astroimgurl = 'static/img/astro.jpeg';
   spaceimgurl = 'static/img/space.jpeg';
+  nightimgurl = 'static/img/night.jpeg';
+  rocketimgurl = 'static/img/rocket.jpeg';
 }
