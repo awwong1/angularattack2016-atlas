@@ -3,16 +3,19 @@
     <div class="row">
       <div class="input-field col m12">
         <select (change)="setSelected($event.target)" id="countries" materialize="material_select" multiple [materializeSelectOptions]="selectOptions">
+          <option disabled>Select one or more Countries</option>
           <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
         </select>
-        <label for="countries">Country(ies)</label>
+        <label for="countries">Country</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col m12">
         <select [(ngModel)]="indicator" id="indicators" materialize="material_select" [materializeSelectOptions]="selectOptions">
+          <option disabled>Select an Indicator</option>
           <option *ngFor="let indicator of indicators" [value]="indicator.id">{{indicator.name}}</option>
         </select>
+        <label for="indicators">Indicators</label>
       </div>
     </div>
     <div class="row">
