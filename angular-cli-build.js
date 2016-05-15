@@ -20,7 +20,7 @@ module.exports = function(defaults) {
       'c3/*.css',
       'c3/*.js',
       'd3/*.js',
-      'd3/*.css'
+      'd3/*.css',
       '@angular/**/*.js'
     ]
   });
