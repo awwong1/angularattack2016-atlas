@@ -19,13 +19,14 @@ import {WorldDataBankService} from "../worldDataBank.service";
 export class QueryBuilderComponent {
   private countries:Array<Country> = [];
   private indicators:Array<Indicator> = [];
-  private startDate:string;
-  private endDate:string;
+  private startDate:number = new Date().getFullYear() - 15;
+  private endDate:number = new Date().getFullYear();
   private indicator:string;
   private loading: boolean = false;
   // variables for input countries tags
   private inputCountries:string = "";
   private inputCountriesSuggestions:Array<Country> = [];
+  private inputErrors = "";
 
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
@@ -53,22 +54,20 @@ export class QueryBuilderComponent {
   }
 
   generateRequest = function () {
+    // If we're loading, don't generate a new request
+    if (this.loading) {
+      return;
+    }
+    
     // Months are zero indexed in javascript, but the API request requirs "1" indexed, so add 1.
-    var startMonth:number = new Date(this.startDate).getMonth() + 1;
-    var startYear:number = new Date(this.startDate).getFullYear();
-    var endMonth:number = new Date(this.endDate).getMonth() + 1;
-    var endYear:number = new Date(this.endDate).getFullYear();
+    var startYear:number = this.startDate;
+    var endYear:number = this.endDate;
     var indicatorCode:string = this.indicator;
     var countryList = "";
     var resultQuery = "http://api.worldbank.org/countries/";
 
-    this.loading = (this.loading === false)? true: false;
-    console.log(this.loading);
-
-
-
+    // get all of the countries from that gross :poop: auto complete implementation
     var selectedCountries:Array<Country> = [];
-
     var rawCountryNames:Array<string> = this.inputCountries.split("|");
     for (var rawCountryName of rawCountryNames) {
       for (var actualCountry of this.countries) {
@@ -79,6 +78,30 @@ export class QueryBuilderComponent {
       }
     }
 
+    if (selectedCountries.length === 0) {
+      this.inputErrors = "Please enter valid countries.";
+      return;
+    }
+    
+    if (!indicatorCode) {
+      this.inputErrors = "Please select an indicator code.";
+      return;
+    }
+    
+    if (!startYear) {
+      this.inputErrors = "Please select a valid start year.";
+      return;
+    }
+    
+    if (!endYear) {
+      this.inputErrors = "Please select a valid end year.";
+      return;
+    }
+    
+    this.inputErrors = "";
+    
+    this.loading = true;
+    
     for (var country in selectedCountries) {
       if (!(selectedCountries.hasOwnProperty(country))) continue;
       countryList += selectedCountries[country].id + ";";
@@ -86,15 +109,18 @@ export class QueryBuilderComponent {
     //Remove trailing semi-colon, may not be necesssary
     countryList = countryList.slice(0, -1);
 
-    // This query includes the months, but those seem to break the year range, so I'm just going with the year range for now
-    //resultQuery += countryList+"/indicators/"+indicatorCode+"?per_page=10000&date="+startYear+"M"+this.pad(startMonth)+":"+endYear+"M"+this.pad(endMonth)+"&format=json"
-    resultQuery += countryList + "/indicators/" + indicatorCode + "?per_page=10000&date=" + startYear + ":" + endYear + "&format=json";
+    // This query includes the months, but those seem to break the year range
+    // so I'm just going with the year range for now
+    resultQuery += countryList + "/indicators/" + indicatorCode + "?per_page=10000&date=" + 
+      startYear + ":" + endYear + "&format=json";
     this.worldDataBankService.execute(resultQuery).subscribe(
       worldDataBankResponse => {
+        this.loading = false;
         // todo: Do something with this
         console.log(worldDataBankResponse);
       },
       error => {
+        this.loading = false;
         console.log('error:');
         console.log(error);
       }
