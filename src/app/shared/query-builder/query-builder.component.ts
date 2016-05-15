@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 
 import {MaterializeDirective} from "angular2-materialize";
 
@@ -13,7 +13,8 @@ import {WorldDataBankService} from "../worldDataBank.service";
   templateUrl: 'app/shared/query-builder/query-builder.component.html',
   directives: [MaterializeDirective],
   providers: [CountryService, IndicatorService, WorldDataBankService],
-  styleUrls:["static/css/spinner.css", "static/css/query-builder.css"]
+  styleUrls:["static/css/spinner.css", "static/css/query-builder.css"],
+  outputs:['loadingEvent']
 })
 
 export class QueryBuilderComponent {
@@ -22,11 +23,13 @@ export class QueryBuilderComponent {
   private startDate:number = new Date().getFullYear() - 15;
   private endDate:number = new Date().getFullYear();
   private indicator:string;
-  private loading: boolean = false;
+  // private loading: boolean = false;
   // variables for input countries tags
   private inputCountries:string = "";
   private inputCountriesSuggestions:Array<Country> = [];
   private inputErrors = "";
+  
+  public loadingEvent: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
@@ -122,6 +125,9 @@ export class QueryBuilderComponent {
         this.loading = false;
         // todo: Do something with this
         console.log(worldDataBankResponse);
+        console.log(this.worldDataBankService.getDataPoints());
+        
+        this.loadingEvent.emit(true);
       },
       error => {
         this.loading = false;

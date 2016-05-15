@@ -12,4 +12,8 @@ export class WorldDataBankComponent {
   constructor() {
       this.title = 'World Data Bank';
   }
+  
+  handleLoading = function(arg){
+     console.log(arg+" The event fired");
+  }
 }
