@@ -21,6 +21,10 @@ export class WorldDataBankService {
     // console.log(WorldDataBankService.dataPoints);
     return WorldDataBankService.dataPoints;
   }
+  public clear = function(){
+      WorldDataBankService.dataPoints = [];
+      return;
+  }
   public execute(url:string):Observable<DataPoint[]> {
     return this.http.get(WorldDataBankService.corsMagic + url)
       .map(WorldDataBankService.extractData)

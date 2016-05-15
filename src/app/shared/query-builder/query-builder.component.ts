@@ -469,6 +469,9 @@ export class QueryBuilderComponent {
     // so I'm just going with the year range for now
     resultQuery += countryList + "/indicators/" + indicatorCode + "?per_page=10000&date=" + 
       startYear + ":" + endYear + "&format=json";
+     
+     // remove old data set.
+     this.worldDataBankService.clear();
     this.worldDataBankService.execute(resultQuery).subscribe(
       worldDataBankResponse => {
         this.loading = false;

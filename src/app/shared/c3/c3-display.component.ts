@@ -32,6 +32,7 @@ export class C3DisplayComponent implements OnChanges{
     
     // Load in the json data points then emit an event to notify wdb component to stop loading animation, and show the c3 component
     if(this.dataLoaded ==true){
+        this.dataPoints = [];
         this.dataPoints = this.worldDataBankService.getDataPoints();
         //                      !
         //                     !!!
