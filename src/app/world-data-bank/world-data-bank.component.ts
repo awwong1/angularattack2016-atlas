@@ -19,19 +19,20 @@ export class WorldDataBankComponent {
   }
   // Fires when the "generate chart" button is pressed.
   startLoading = function(arg){
-     console.log(arg+" The event fired");
+    //  console.log(arg+" The event fired");
      this.loading = true;
-     // Reset this so that the chart will clear so we can load a new query
+     
+     // Reset the wdbServiceComplete var to false, so that the chart will clear so we can load a new query
      this.wdbServiceComplete = false;
-     console.log(this.loading);
+    //  console.log(this.loading);
   }
   // Fires when the word-data-bank service finishes loading the data points from the api request.
   wdbServiceFinished = function(arg){
-    console.log("wdbService has finished");
+    // console.log("wdbService has finished");
     this.wdbServiceComplete = true;
   }
   stopLoadingAnimation = function(arg){
-    console.log("Chart is ready, loading has finished");
+    // console.log("Chart is ready, loading has finished");
     this.loading = false;
     this.showChart = true;
   }

@@ -125,10 +125,8 @@ export class QueryBuilderComponent {
     this.worldDataBankService.execute(resultQuery).subscribe(
       worldDataBankResponse => {
         this.loading = false;
-        // todo: Do something with this
-        console.log(worldDataBankResponse);
-        console.log(this.worldDataBankService.getDataPoints());
         
+        // This event tells the wbd component that the json response has be recieved.
         this.serviceEndEvent.emit(true);
       },
       error => {
@@ -137,7 +135,6 @@ export class QueryBuilderComponent {
         console.log(error);
       }
     );
-    // console.log(startYear);
 
   };
 
