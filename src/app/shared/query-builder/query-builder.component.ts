@@ -18,7 +18,7 @@ import {WorldDataBankService} from "../worldDataBank.service";
 
 export class QueryBuilderComponent {
   private countries:Array<Country> = [];
-  private indicators:Array<Indicator> = [];
+  private tIndicators:Array<Indicator> = [];
   private startDate:number = new Date().getFullYear() - 15;
   private endDate:number = new Date().getFullYear();
   private indicator:string;
@@ -31,20 +31,33 @@ export class QueryBuilderComponent {
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
               private worldDataBankService:WorldDataBankService) {
+    let testIndicator = new Indicator();
+    testIndicator.name = 'test';
+    testIndicator.id = 'testId';
+    this.tIndicators.push(testIndicator);
+
+    console.log('getting countries');
     this.countryService.getCountries()
       .subscribe(
         countries => {
-          this.countries = countries;
+          console.log('got countries');
+          for (var tCountry of countries) {
+            this.countries.push(tCountry);
+          }
         },
         error => {
           console.log('error:');
           console.log(error);
         }
       );
+    console.log('getting indicators');
     this.indicatorService.getIndicators()
       .subscribe(
         indicators => {
-          this.indicators = indicators;
+          console.log('got indicators');
+          for (var tIndicator of indicators) {
+            this.tIndicators.push(tIndicator);
+          }
         },
         error => {
           console.log('error:');
