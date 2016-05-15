@@ -942,24 +942,6 @@
     System.import('system-config.js').then(function () {
       System.import('main');
     }).catch(console.error.bind(console));
-
-    System.config({
-      defaultJSExtensions: true,
-      packages: {
-        "materialize-css": {
-          "main": "dist/js/materialize"
-        },
-        "materialize": {
-          "main": "dist/materialize-directive",
-          "defaultExtension": "js"
-        }
-      },
-      map: {
-        "materialize-css": "vendor/materialize-css",
-        "materialize": "vendor/angular2-materialize",
-        "angular2-materialize": "vendor/angular2-materialize"
-      }
-    });
   </script>
 </body>
 </html>
