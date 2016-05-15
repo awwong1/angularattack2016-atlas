@@ -13,7 +13,7 @@ import {WorldDataBankService} from "../worldDataBank.service";
   templateUrl: 'app/shared/query-builder/query-builder.component.html',
   directives: [MaterializeDirective],
   providers: [CountryService, IndicatorService, WorldDataBankService],
-  styleUrls:["static/css/spinner.css"]
+  styleUrls:["static/css/spinner.css", "static/css/query-builder.css"]
 })
 
 export class QueryBuilderComponent {
