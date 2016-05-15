@@ -1,3 +1,11 @@
 <h1>{{title}}</h1>
 <p>Potential spot for the How To?</p>
-<query-builder (loadingEvent)="handleLoading($event)"></query-builder>
+<query-builder (serviceStartEvent)="startLoading($event)" (serviceEndEvent)="wdbServiceFinished($event)"></query-builder>
+<div *ngIf="loading" class="cssload-thecube">
+  <div class="cssload-cube cssload-c1"></div>
+  <div class="cssload-cube cssload-c2"></div>
+  <div class="cssload-cube cssload-c4"></div>
+  <div class="cssload-cube cssload-c3"></div>
+</div>
+<c3-display  [dataLoaded]="wdbServiceComplete" (chartRenderComplete)="stopLoadingAnimation($event)"></c3-display>
+<!--<c3-display *ngIf="showChart" [dataLoaded]="wdbServiceComplete" (chartRenderComplete)="stopLoadingAnimation($event)"></c3-display>-->

@@ -14,7 +14,7 @@ import {WorldDataBankService} from "../worldDataBank.service";
   directives: [MaterializeDirective],
   providers: [CountryService, IndicatorService, WorldDataBankService],
   styleUrls:["static/css/spinner.css", "static/css/query-builder.css"],
-  outputs:['loadingEvent']
+  outputs:['serviceStartEvent', 'serviceEndEvent']
 })
 
 export class QueryBuilderComponent {
@@ -23,13 +23,14 @@ export class QueryBuilderComponent {
   private startDate:number = new Date().getFullYear() - 15;
   private endDate:number = new Date().getFullYear();
   private indicator:string;
-  // private loading: boolean = false;
+  private loading: boolean = false;
   // variables for input countries tags
   private inputCountries:string = "";
   private inputCountriesSuggestions:Array<Country> = [];
   private inputErrors = "";
   
-  public loadingEvent: EventEmitter<boolean> = new EventEmitter();
+  public serviceStartEvent: EventEmitter<boolean> = new EventEmitter();
+  public serviceEndEvent: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
@@ -108,6 +109,7 @@ export class QueryBuilderComponent {
     this.inputErrors = "";
     
     this.loading = true;
+    this.serviceStartEvent.emit(true);
     
     for (var country in selectedCountries) {
       if (!(selectedCountries.hasOwnProperty(country))) continue;
@@ -127,7 +129,7 @@ export class QueryBuilderComponent {
         console.log(worldDataBankResponse);
         console.log(this.worldDataBankService.getDataPoints());
         
-        this.loadingEvent.emit(true);
+        this.serviceEndEvent.emit(true);
       },
       error => {
         this.loading = false;
