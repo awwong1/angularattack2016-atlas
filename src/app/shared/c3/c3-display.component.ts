@@ -4,6 +4,10 @@ import {WorldDataBankService} from "../worldDataBank.service";
 import {DataPoint} from '../dataPoint';
 import * as c3 from "c3";
 
+interface CountryData {
+    data:Array<number>;
+}
+
 @Component({
   selector: 'c3-display',
   templateUrl: 'app/shared/c3/c3-display.component.html',
@@ -11,10 +15,12 @@ import * as c3 from "c3";
   providers: [WorldDataBankService],
   outputs:['chartRenderComplete']
 })
+
 export class C3DisplayComponent implements OnChanges{
     public chartRenderComplete: EventEmitter<boolean> = new EventEmitter();
     private dataPoints:Array<DataPoint> = [];
     private showChart:boolean = false;
+    private userMessage:String = "";
     @Input() dataLoaded:boolean;
     constructor(
               private worldDataBankService:WorldDataBankService) {
@@ -37,15 +43,35 @@ export class C3DisplayComponent implements OnChanges{
         //                     !!!
         //                      !
         
+        // What we want to track
+        var countryData : { [country:string] : CountryData }  = {}; 
+        
+        var dataColumns = [['Year']];
+        var country = "";
+        var counter = 0;
+        var valueNum:number = 0;
+        for (var dataPoint of this.dataPoints) {
+           if (country != dataPoint.country.name) {
+               country = dataPoint.country.name;
+               dataColumns.push([country]);
+               counter += 1;
+           }
+           if (dataPoint.value != null) {
+            dataColumns[counter].push(dataPoint.value);
+            
+            if (!(dataColumns[0].indexOf(dataPoint.value) > -1)) {
+                dataColumns[0].push(dataPoint.date);
+            }
+           }
+          
+        } 
+        
         
         var chart = c3.generate({
             bindto: '#chart',
             data: {
-                columns: [
-                    ['data1', 30, 200, 100, 400, 150, 250],
-                    ['data2', 50, 20, 10, 40, 15, 25]
-                ],
-            type: 'bar'
+                x: 'Year', 
+                columns: dataColumns,
             }
         });
         
