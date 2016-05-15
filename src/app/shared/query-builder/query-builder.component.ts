@@ -12,7 +12,8 @@ import {WorldDataBankService} from "../worldDataBank.service";
   selector: 'query-builder',
   templateUrl: 'app/shared/query-builder/query-builder.component.html',
   directives: [MaterializeDirective],
-  providers: [CountryService, IndicatorService, WorldDataBankService]
+  providers: [CountryService, IndicatorService, WorldDataBankService],
+  styleUrls:["static/css/spinner.css"]
 })
 
 export class QueryBuilderComponent {
@@ -21,7 +22,7 @@ export class QueryBuilderComponent {
   private startDate:string;
   private endDate:string;
   private indicator:string;
-
+  private loading: boolean = false;
 
   constructor(private countryService:CountryService,
               private indicatorService:IndicatorService,
@@ -57,6 +58,9 @@ export class QueryBuilderComponent {
     var indicatorCode:string = this.indicator;
     var countryList = "";
     var resultQuery = "http://api.worldbank.org/countries/";
+    
+    this.loading = (this.loading === false)? true: false;
+    console.log(this.loading);
     //BHS/indicators/AG.LND.TRAC.ZS?per_page=100&date=1960:2016&format=json
     var selectedCountries = this.countries.filter((item) => {
       return item.selected === true;
