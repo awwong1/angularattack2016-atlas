@@ -9,7 +9,7 @@
           <input [(ngModel)]="inputCountries" (keyup)="countriesInputChanged($event)" placeholder="Country"
                  id="inputCountries"
                  type="text" class="validate" autocomplete="off">
-          <ul>
+          <ul class="z-depth-2">
             <li class="dropDownList" (click)="countriesInputClicked(suggestCountry)"
                 *ngFor="let suggestCountry of inputCountriesSuggestions">{{suggestCountry.name}}
             </li>
