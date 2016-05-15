@@ -2,6 +2,15 @@
 
 Hackathon project for [AngularAttack 2016](https://www.angularattack.com). Visualize and interact with [World Data Bank api](http://data.worldbank.org/developers/api-overview).
 
+Visit the live app at [atlas.2016.angularattack.io](http://atlas.2016.angularattack.io/).
+Click on the World Data Bank link in the navbar to start visualizing different global census data. A sample query to start with is:
+Country (ies): United States, Canada
+Indicator: Death rate, crude (per 1,000 people)
+From: 1980
+To: 2001
+
+Note: Not all indicators have complete data sets for every country/year, so many chart combinations by be incomplete.
+
 ### Step 1) Get Your Local Environment setup
 
 Clone this repo locally, and make sure all your team members have access to it. This project was generated using [angular2-cli](https://github.com/angular/angular-cli).

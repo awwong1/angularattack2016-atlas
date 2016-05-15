@@ -23,7 +23,7 @@
         <select [(ngModel)]="indicator" id="indicators" materialize="material_select"
                 [materializeSelectOptions]="selectOptions">
           <option disabled>Select an Indicator</option>
-          <option *ngFor="let indicator of indicators" [value]="indicator.id">{{indicator.name}}</option>
+          <option *ngFor="let indicatorRef of tIndicators" [value]="indicatorRef.id">{{indicatorRef.name}}</option>
         </select>
         <label for="indicators">Indicators</label>
       </div>

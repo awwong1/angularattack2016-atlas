@@ -7,7 +7,7 @@ import {Indicator} from './indicator';
 
 @Injectable()
 export class IndicatorService {
-  private indicatorsUrl = '/app/shared/query-resource/indicators.json';
+  private indicatorsUrl:string = '/app/shared/query-resource/indicators.json';
 
   constructor(private http:Http) {
     this.http = http;
