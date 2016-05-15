@@ -89,12 +89,16 @@ export class QueryBuilderComponent {
     }
     
     if (!startYear) {
-      this.inputErrors = "Please select a valid start year.";
+      this.inputErrors = "Please select a valid start year (must be greater than or equal to 1960, and less than the end year).";
       return;
     }
     
     if (!endYear) {
-      this.inputErrors = "Please select a valid end year.";
+      this.inputErrors = "Please select a valid end year (must be less than or equal to the current year, and greater than the start year)";
+      return;
+    }
+    if(startYear>endYear){
+      this.inputErrors = "Start year must be less than end year";
       return;
     }
     
