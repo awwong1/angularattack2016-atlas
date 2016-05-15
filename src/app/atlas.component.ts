@@ -19,6 +19,7 @@ import {WorldDataBankComponent} from "./world-data-bank/world-data-bank.componen
 })
 export class AtlasAppComponent {
   title = 'Atlas';
+  logoimgurl = 'static/img/logo.jpeg';
 
   constructor(private router:Router) {
   }
