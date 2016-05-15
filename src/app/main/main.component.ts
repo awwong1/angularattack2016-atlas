@@ -4,7 +4,8 @@ import {MaterializeDirective} from "angular2-materialize";
 @Component({
   selector: 'world-data-bank',
   templateUrl: 'app/main/main.component.html',
-  directives: [MaterializeDirective]
+  directives: [MaterializeDirective],
+  styleUrls: ['app/main/main.component.css']
 })
 
 
