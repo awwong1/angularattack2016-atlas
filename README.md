@@ -1,5 +1,7 @@
 # Atlas
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/awwong1/angularattack2016-atlas.svg)](https://greenkeeper.io/)
+
 Hackathon project for [AngularAttack 2016](https://www.angularattack.com). Visualize and interact with [World Data Bank api](http://data.worldbank.org/developers/api-overview).
 
 Visit the live app at [atlas.2016.angularattack.io](http://atlas.2016.angularattack.io/).
